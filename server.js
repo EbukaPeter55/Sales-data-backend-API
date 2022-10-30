@@ -1,7 +1,6 @@
-const express = require('express');
-// const bodyParser = require('body-parser')
+const express = require('express'); //import express to the app
 
-const cors = require('cors');
+const cors = require('cors'); //import cors to the app
 
 var pool = require('./db_connect');
 
@@ -9,8 +8,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // Parsing middleware
-// Parse application/x-www-form-urlencoded
-app.use(express.urlencoded({extended: true})); // New
+app.use(express.urlencoded({extended: true}));
 // Parse application/json
 app.use(express.json());
 
@@ -33,7 +31,7 @@ app.post('', (req, res) => {
             console.log(err)
         }
         
-        console.log('The data from sales table are:11 \n', rows)
+        console.log(' Sales table data is:11 \n', rows)
 
         })
     })
@@ -43,7 +41,7 @@ app.post('', (req, res) => {
 app.get('/sales', (req, res) => {
     pool.getConnection((err, connection) => {
         if(err) throw err
-        console.log('connected as id ' + connection.threadId)
+        console.log('connection established as id ' + connection.threadId)
         connection.query('SELECT * from sales', (err, rows) => {
             connection.release() // return the connection to connect
 
@@ -54,7 +52,7 @@ app.get('/sales', (req, res) => {
             }
 
             // if(err) throw err
-            console.log('The data from sales table are: \n', rows)
+            console.log(' Sales table data is: \n', rows)
         })
     })
 })
